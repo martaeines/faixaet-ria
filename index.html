@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faixa Etária</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #9292d4;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            color: #4CAF50;
+        }
+
+        form {
+            margin: 20px 0;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            font-size: 16px;
+            margin-right: 10px;
+            width: 80px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            margin-top: 30px;
+        }
+
+        #age-image {
+            margin-top: 20px;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #b35050;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td {
+            background-color: #fafafa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Determina a Faixa Etária</h1>
+        <form id="age-form">
+            <label for="age">Idade:</label>
+            <input type="number" id="age" name="age" required>
+            <button type="submit">Ver Faixa Etária</button>
+        </form>
+
+        <div id="result">
+            <h2>Resultado:</h2>
+            <p id="age-group">Insira a idade para ver a faixa etária.</p>
+            <img id="age-image" src="" alt="Imagem da faixa etária">
+        </div>
+
+        <h2>Intervalos de Idade</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Faixa Etária</th>
+                    <th>Intervalo de Idade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Bebé</td><td>0-2 anos</td></tr>
+                <tr><td>Criança</td><td>3-11 anos</td></tr>
+                <tr><td>Adolescente</td><td>12-16 anos</td></tr>
+                <tr><td>Jovem Adulto</td><td>17 anos</td></tr>
+                <tr><td>Adulto</td><td>18-49 anos</td></tr>
+                <tr><td>Adulto de Meia Idade</td><td>50-65 anos</td></tr>
+                <tr><td>Idoso</td><td>66-99 anos</td></tr>
+                <tr><td>Lendário</td><td>100-129 anos</td></tr>
+                <tr><td>Imortal</td><td>130+ anos</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.getElementById("age-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const age = parseInt(document.getElementById("age").value);
+            const resultElement = document.getElementById("age-group");
+            const imageElement = document.getElementById("age-image");
+
+            if (isNaN(age) || age < 0) {
+                alert("Por favor, insira uma idade válida.");
+                return;
+            }
+
+            let ageGroup = "";
+            let imageSrc = "";
+
+            if (age >= 0 && age <= 2) {
+                ageGroup = "Bebé";
+                imageSrc = "imagens/bebe.jpg";
+            } else if (age > 3 && age < 11) {
+                ageGroup = "Criança";
+                imageSrc = "imagens/crianca.jpg";
+            } else if (age >= 12 && age <= 16) {
+                ageGroup = "Adolescente";
+                imageSrc = "imagens/adolescente.jpg";
+            } else if (age == 17) {
+                ageGroup = "Jovem Adulto";
+                imageSrc = "imagens/jovem_adulto.jpg";
+            } else if (age >= 18 && age < 49) {
+                ageGroup = "Adulto";
+                imageSrc = "imagens/adulto.jpg";
+            } else if (age >= 50 && age <= 64) {
+                ageGroup = "Adulto de Meia Idade";
+                imageSrc = "imagens/meia_idade.jpg";
+            } else if (age > 65 && age <= 99) {
+                ageGroup = "Idoso";
+                imageSrc = "imagens/idoso.jpg";
+            } else if (age > 100 && age <= 129) {
+                ageGroup = "Lendário";
+                imageSrc = "imagens/lendario.jpg";
+            } else {
+                ageGroup = "Imortal";
+                imageSrc = "imagens/imortal.jpg";
+            }
+
+            resultElement.textContent = `A sua faixa etária é: ${ageGroup}`;
+            imageElement.src = imageSrc;
+            imageElement.alt = ageGroup;
+        });
+    </script>
+</body>
+</html>
